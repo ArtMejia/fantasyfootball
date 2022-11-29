@@ -95,75 +95,75 @@ public class Player {
                 isRostered = rostered;
         }
 
-        public short getPassingYards() {
-                return passingYards;
-        }
-
-        public void setPassingYards(short passingYards) {
-                this.passingYards = passingYards;
-        }
-
-        public short getPassingTDs() {
-                return passingTDs;
-        }
-
-        public void setPassingTDs(short passingTDs) {
-                this.passingTDs = passingTDs;
-        }
-
-        public short getInterceptions() {
-                return interceptions;
-        }
-
-        public void setInterceptions(short interceptions) {
-                this.interceptions = interceptions;
-        }
-
-        public short getRushingYards() {
-                return rushingYards;
-        }
-
-        public void setRushingYards(short rushingYards) {
-                this.rushingYards = rushingYards;
-        }
-
-        public short getRushingTDs() {
-                return rushingTDs;
-        }
-
-        public void setRushingTDs(short rushingTDs) {
-                this.rushingTDs = rushingTDs;
-        }
-
-        public short getReceptions() {
-                return receptions;
-        }
-
-        public void setReceptions(short receptions) {
-                this.receptions = receptions;
-        }
-
-        public short getReceivingYards() {
-                return receivingYards;
-        }
-
-        public void setReceivingYards(short receivingYards) {
-                this.receivingYards = receivingYards;
-        }
-
-        public short getReceivingTDs() {
-                return receivingTDs;
-        }
-
-        public void setReceivingTDs(short receivingTDs) {
-                this.receivingTDs = receivingTDs;
-        }
-
-        public short getFumbles() {
-                return fumbles;
-        }
-
-        public void setFumbles(short fumbles) {
-                this.fumbles = fumbles;
-        }
+//        public short getPassingYards() {
+//                return passingYards;
+//        }
+//
+//        public void setPassingYards(short passingYards) {
+//                this.passingYards = passingYards;
+//        }
+//
+//        public short getPassingTDs() {
+//                return passingTDs;
+//        }
+//
+//        public void setPassingTDs(short passingTDs) {
+//                this.passingTDs = passingTDs;
+//        }
+//
+//        public short getInterceptions() {
+//                return interceptions;
+//        }
+//
+//        public void setInterceptions(short interceptions) {
+//                this.interceptions = interceptions;
+//        }
+//
+//        public short getRushingYards() {
+//                return rushingYards;
+//        }
+//
+//        public void setRushingYards(short rushingYards) {
+//                this.rushingYards = rushingYards;
+//        }
+//
+//        public short getRushingTDs() {
+//                return rushingTDs;
+//        }
+//
+//        public void setRushingTDs(short rushingTDs) {
+//                this.rushingTDs = rushingTDs;
+//        }
+//
+//        public short getReceptions() {
+//                return receptions;
+//        }
+//
+//        public void setReceptions(short receptions) {
+//                this.receptions = receptions;
+//        }
+//
+//        public short getReceivingYards() {
+//                return receivingYards;
+//        }
+//
+//        public void setReceivingYards(short receivingYards) {
+//                this.receivingYards = receivingYards;
+//        }
+//
+//        public short getReceivingTDs() {
+//                return receivingTDs;
+//        }
+//
+//        public void setReceivingTDs(short receivingTDs) {
+//                this.receivingTDs = receivingTDs;
+//        }
+//
+//        public short getFumbles() {
+//                return fumbles;
+//        }
+//
+//        public void setFumbles(short fumbles) {
+//                this.fumbles = fumbles;
+//        }
 }
