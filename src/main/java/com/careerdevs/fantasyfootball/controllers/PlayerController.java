@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,8 +48,8 @@ public class PlayerController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deletePlayerById(@PathVariable Long id) {
-        Player requestedPlayer = playerRepository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Payer with ID: " +id+" is not found"));
+        Player requestedPlayer = playerRepository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Player with ID: " + id +" is not found"));
         playerRepository.deleteById(id);
-        return new ResponseEntity<>(requestedPlayer, HttpStatus.OK);
+        return new ResponseEntity<>("Player with ID " + id + ", " + requestedPlayer.getLastName() + ", has been deleted.", HttpStatus.OK);
     }
 }
