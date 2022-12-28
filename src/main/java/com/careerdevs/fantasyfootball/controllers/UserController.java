@@ -13,22 +13,19 @@ import java.util.Optional;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/users")
 public class UserController {
 
     @Autowired UserRepository userRepository;
 
     @PostMapping
     public ResponseEntity<?> createAUser(@RequestBody User newUserData) {
-        User newUser = userRepository.save(newUserData);
-        return new ResponseEntity<>(newUser, HttpStatus.CREATED);
-    }
-
-    @DeleteMapping("/allUsers")
-    public ResponseEntity<?> deleteAllUsers() {
-        long count = userRepository.count();
-        userRepository.deleteAll();
-        return new ResponseEntity<>("Deleted Users: " + count, HttpStatus.OK);
+        try {
+            User newUser = userRepository.save(newUserData);
+            return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(e.getMessage());
+        }
     }
 
     @GetMapping
@@ -39,11 +36,8 @@ public class UserController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getUserById(@PathVariable Long id) {
-        Optional<User> requestedUser = userRepository.findById(id);
-        if (requestedUser.isEmpty()) {
-            return new ResponseEntity<>("Invalid ID", HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(requestedUser.get(), HttpStatus.OK);
+        User requestedUser = userRepository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "User with ID: " + id + " is not found"));
+        return new ResponseEntity<>(requestedUser, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
@@ -52,4 +46,11 @@ public class UserController {
         userRepository.deleteById(id);
         return new ResponseEntity<>("User with ID: " + id + ", " + requestedUser.getFullName() + ", has been deleted.", HttpStatus.OK);
     }
+
+//    @DeleteMapping("/allUsers")
+//    public ResponseEntity<?> deleteAllUsers() {
+//        long count = userRepository.count();
+//        userRepository.deleteAll();
+//        return new ResponseEntity<>("Deleted Users: " + count, HttpStatus.OK);
+//    }
 }

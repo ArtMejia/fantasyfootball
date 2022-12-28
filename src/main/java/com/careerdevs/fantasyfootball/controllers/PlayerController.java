@@ -9,27 +9,23 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Optional;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/player")
+@RequestMapping("/api/players")
 public class PlayerController {
 
     @Autowired PlayerRepository playerRepository;
 
     @PostMapping
-    public ResponseEntity<?> createAPlayer(@RequestBody Player newPlayerData) {
-        Player newPlayer = playerRepository.save(newPlayerData);
-        return new ResponseEntity<>(newPlayer, HttpStatus.CREATED);
+    public ResponseEntity<?> createOnePlayer(@RequestBody Player newPlayerData) {
+        try {
+            Player newPlayer = playerRepository.save(newPlayerData);
+            return new ResponseEntity<>(newPlayer, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(e.getMessage());
+        }
     }
-
-//    @DeleteMapping("/allPlayers")
-//    public ResponseEntity<?> deleteAllPlayers() {
-//        long count = playerRepository.count();
-//        playerRepository.deleteAll();
-//        return new ResponseEntity<>("Deleted Players: " + count, HttpStatus.OK);
-//    }
 
     @GetMapping
     public ResponseEntity<?> getAllPlayers() {
@@ -39,11 +35,8 @@ public class PlayerController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getPlayerById(@PathVariable Long id) {
-        Optional<Player> requestedPlayer = playerRepository.findById(id);
-        if (requestedPlayer.isEmpty()) {
-            return new ResponseEntity<>("Invalid ID", HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(requestedPlayer.get(), HttpStatus.OK);
+        Player requestedPlayer = playerRepository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Player with ID: " + id +" is not found"));
+        return new ResponseEntity<>(requestedPlayer, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
@@ -52,4 +45,13 @@ public class PlayerController {
         playerRepository.deleteById(id);
         return new ResponseEntity<>("Player with ID " + id + ", " + requestedPlayer.getLastName() + ", has been deleted.", HttpStatus.OK);
     }
+
+
+//    @DeleteMapping
+//    public ResponseEntity<?> deleteAllPlayers() {
+//        long count = playerRepository.count();
+//        playerRepository.deleteAll();
+//        return new ResponseEntity<>("Deleted Players: " + count, HttpStatus.OK);
+//    }
+
 }
