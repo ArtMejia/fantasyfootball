@@ -39,6 +39,12 @@ public class PlayerController {
         return new ResponseEntity<>(requestedPlayer, HttpStatus.OK);
     }
 
+    @GetMapping("/{lastName}")
+    public ResponseEntity<?> getPlayersByLastName(@PathVariable("lastName") String lastName) {
+        List<Player> requestedName = playerRepository.findAllByLastName(lastName);
+        return new ResponseEntity<>(requestedName, HttpStatus.OK);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deletePlayerById(@PathVariable Long id) {
         Player requestedPlayer = playerRepository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Player with ID: " + id +" is not found"));
