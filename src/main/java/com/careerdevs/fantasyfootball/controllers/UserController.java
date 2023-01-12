@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Optional;
 
 @CrossOrigin
 @RestController
@@ -45,6 +44,12 @@ public class UserController {
         User requestedUser = userRepository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "User with ID: " + id + " is not found"));
         userRepository.deleteById(id);
         return new ResponseEntity<>("User with ID: " + id + ", " + requestedUser.getFullName() + ", has been deleted.", HttpStatus.OK);
+    }
+
+    @GetMapping("/{username}")
+    public ResponseEntity<?> getUserByUsername(@PathVariable String userName) {
+        User requestedUser = userRepository.findUserByUsername(userName);
+        return new ResponseEntity<>(requestedUser, HttpStatus.OK);
     }
 
 //    @DeleteMapping("/allUsers")
