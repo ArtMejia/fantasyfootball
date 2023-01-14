@@ -39,6 +39,12 @@ public class TeamController {
         return new ResponseEntity<>(requestedTeam, HttpStatus.OK);
     }
 
+    @GetMapping("?{teamName}")
+    public ResponseEntity<?> getAllTeamsByTeamname(@PathVariable String teamName) {
+        List<Team> requestedTeams = teamRepository.findAllByTeamName(teamName);
+        return new ResponseEntity<>(requestedTeams, HttpStatus.OK);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteTeamById(@PathVariable Long id) {
         Team requestedTeam = teamRepository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Team with ID: " + id +" is not found"));
