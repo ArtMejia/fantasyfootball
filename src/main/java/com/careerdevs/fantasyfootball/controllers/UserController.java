@@ -52,6 +52,13 @@ public class UserController {
         return new ResponseEntity<>(requestedUser, HttpStatus.OK);
     }
 
+    @DeleteMapping("/{username}")
+    public ResponseEntity<?> deleteUserByUsername(@PathVariable String userName) {
+        User requestedUser = userRepository.findUserByUsername(userName);
+        userRepository.deleteUserByUsername(userName);
+        return new ResponseEntity<>(requestedUser, HttpStatus.OK);
+    }
+
 //    @DeleteMapping("/allUsers")
 //    public ResponseEntity<?> deleteAllUsers() {
 //        long count = userRepository.count();
